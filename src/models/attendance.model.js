@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const AttendanceSchema = new mongoose.Schema({
   user_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   mark_in: {
     type: Date,

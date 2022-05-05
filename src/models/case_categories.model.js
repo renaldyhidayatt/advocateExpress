@@ -5,7 +5,7 @@ const CaseCategorySchema = new mongoose.Schema({
     type: String,
   },
   parent_id: {
-    type: String,
+    type: Number,
   },
 });
 

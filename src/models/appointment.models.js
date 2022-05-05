@@ -6,7 +6,8 @@ const AppointmentModel = new mongoose.Schema({
     required: true,
   },
   contant_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Contact",
   },
   motive: {
     type: String,
