@@ -16,7 +16,7 @@ module.exports = {
   },
   getAttendanceByUser: async (req, res) => {
     try {
-      const attendance = await AttendanceModel.find({ user_id: req.params.id });
+      const attendance = await AttendanceModel.find({ user: req.params.id });
       res.status(200).json({
         message: "Success",
         data: attendance,

@@ -1,9 +1,15 @@
-const CaseStudyModel = require("../models/case_study.model");
+const {
+  getAllCaseStudy,
+  getCaseStudy,
+  createCaseStudy,
+  updateCaseStudy,
+  deleteCaseStudy,
+} = require("../services/case_study.service");
 
-module.exports = {
-  getAllCaseStudy: async (req, res) => {
+class CaseStudyController {
+  async getAllCaseStudy(req, res) {
     try {
-      const caseStudies = await CaseStudyModel.find();
+      const caseStudies = await getAllCaseStudy();
       res.status(200).json({
         message: "Success",
         data: caseStudies,
@@ -13,10 +19,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  getCaseStudy: async (req, res) => {
+  }
+  async getCaseStudy(req, res) {
     try {
-      const caseStudy = await CaseStudyModel.findById(req.params.id);
+      const caseStudy = await getCaseStudy(req.params.id);
       res.status(200).json({
         message: "Success",
         data: caseStudy,
@@ -26,10 +32,16 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  createCaseStudy: async (req, res) => {
+  }
+  async createCaseStudy(req, res) {
     try {
-      const caseStudy = await CaseStudyModel.create(req.body);
+      const body = {
+        title: req.body.title,
+        case_category: req.body.case_category,
+        notes: req.body.notes,
+        result: req.body.result,
+      };
+      const caseStudy = await createCaseStudy(body);
       res.status(201).json({
         message: "Success",
         data: caseStudy,
@@ -39,13 +51,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  updateCaseStudy: async (req, res) => {
+  }
+  async updateCaseStudy(req, res) {
     try {
-      const caseStudy = await CaseStudyModel.findByIdAndUpdate(
-        req.params.id,
-        req.body
-      );
+      const caseStudy = await updateCaseStudy(req.params.id, req.body);
       res.status(200).json({
         message: "Success",
         data: caseStudy,
@@ -55,10 +64,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  deleteCaseStudy: async (req, res) => {
+  }
+  async deleteCaseStudy(req, res) {
     try {
-      const caseStudy = await CaseStudyModel.findByIdAndDelete(req.params.id);
+      const caseStudy = await deleteCaseStudy(req.params.id);
       res.status(200).json({
         message: "Success",
         data: caseStudy,
@@ -68,5 +77,6 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-};
+  }
+}
+module.exports = new CaseStudyController();

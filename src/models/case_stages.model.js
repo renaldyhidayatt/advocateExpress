@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const CaseCategorySchema = new mongoose.Schema({
+const CaseStageSchema = new mongoose.Schema({
   name: {
     type: String,
   },
 });
 
-const CaseCategory = mongoose.model("CaseCategory", CaseCategorySchema);
+const CaseStage = mongoose.model("CaseStage", CaseStageSchema);
 
-module.exports = CaseCategory;
+module.exports = CaseStage;

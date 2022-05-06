@@ -1,9 +1,15 @@
-const ContactModel = require("../models/contact.model");
+const {
+  getAllContact,
+  getContact,
+  createContact,
+  updateContact,
+  deleteContact,
+} = require("../services/contact.service");
 
-module.exports = {
-  getAllContact: async (req, res) => {
+class ContactController {
+  async getAllContact(req, res) {
     try {
-      const contacts = await ContactModel.find();
+      const contacts = await getAllContact();
       res.status(200).json({
         message: "Success",
         data: contacts,
@@ -13,10 +19,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  getContact: async (req, res) => {
+  }
+  async getContact(req, res) {
     try {
-      const contact = await ContactModel.findById(req.params.id);
+      const contact = await getContact(req.params.id);
       res.status(200).json({
         message: "Success",
         data: contact,
@@ -26,10 +32,16 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  createContact: async (req, res) => {
+  }
+  async createContact(req, res) {
     try {
-      const contact = await ContactModel.create(req.body);
+      const body = {
+        name: req.body.name,
+        contact: req.body.contact,
+        email: req.body.email,
+        address: req.body.address,
+      };
+      const contact = await createContact(body);
       res.status(201).json({
         message: "Success",
         data: contact,
@@ -39,16 +51,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  updateContact: async (req, res) => {
+  }
+  async updateContact(req, res) {
     try {
-      const contact = await ContactModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
+      const contact = await updateContact(req.params.id, req.body);
       res.status(200).json({
         message: "Success",
         data: contact,
@@ -58,10 +64,10 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-  deleteContact: async (req, res) => {
+  }
+  async deleteContact(req, res) {
     try {
-      const contact = await ContactModel.findByIdAndDelete(req.params.id);
+      const contact = await deleteContact(req.params.id);
       res.status(200).json({
         message: "Success",
         data: contact,
@@ -71,5 +77,7 @@ module.exports = {
         message: `Error: ${err}`,
       });
     }
-  },
-};
+  }
+}
+
+module.exports = new ContactController();

@@ -5,7 +5,7 @@ const AppointmentModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contant_id: {
+  contact: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Contact",
   },
