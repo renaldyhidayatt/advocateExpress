@@ -4,11 +4,13 @@ const CourtSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  location_id: {
-    type: String,
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Location",
   },
-  court_category_id: {
-    type: Number,
+  courtCategory: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CourtCategory",
   },
   description: {
     type: String,

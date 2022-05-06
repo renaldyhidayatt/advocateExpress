@@ -1,85 +1,25 @@
 const HolidayModel = require("../models/holiday.model");
 
 module.exports = {
-  getAllHolidays: async (req, res) => {
-    try {
-      const holidays = await HolidayModel.find();
-      res.status(200).json({
-        message: "Success",
-        data: holidays,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  getAllHolidays: () => {
+    return HolidayModel.find();
   },
-  getHoliday: async (req, res) => {
-    try {
-      const holiday = await HolidayModel.findById(req.params.id);
-      res.status(200).json({
-        message: "Success",
-        data: holiday,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  getHoliday: (id) => {
+    return HolidayModel.findById(id);
   },
-  getHolidayMonth: async (req, res) => {
-    try {
-      const holiday = await HolidayModel.find({ month: req.params.month });
-      res.status(200).json({
-        message: "Success",
-        data: holiday,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  getHolidayMonth: (month) => {
+    return HolidayModel.aggregate([
+      { $addFields: { month: { $month: "$date" } } },
+      { $match: { month: month ? "3" : "3" } },
+    ]);
   },
-  createHoliday: async (req, res) => {
-    try {
-      const holiday = await HolidayModel.create(req.body);
-      res.status(201).json({
-        message: "Success",
-        data: holiday,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  createHoliday: (data) => {
+    return HolidayModel.create({ ...data });
   },
-  updateHoliday: async (req, res) => {
-    try {
-      const holiday = await HolidayModel.findByIdAndUpdate(
-        req.params.id,
-        req.body
-      );
-      res.status(200).json({
-        message: "Success",
-        data: holiday,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  updateHoliday: (id, data) => {
+    return HolidayModel.findByIdAndUpdate(id, { $set: { ...data } });
   },
-  deleteHoliday: async (req, res) => {
-    try {
-      const holiday = await HolidayModel.findByIdAndDelete(req.params.id);
-      res.status(200).json({
-        message: "Success",
-        data: holiday,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  deleteHoliday: (id) => {
+    return HolidayModel.findByIdAndDelete(id);
   },
 };

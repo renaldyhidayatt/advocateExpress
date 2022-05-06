@@ -5,7 +5,8 @@ const CaseStudySchema = new mongoose.Schema({
     type: String,
   },
   cases_categories: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CaseCategory",
   },
   notes: {
     type: String,

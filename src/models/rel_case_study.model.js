@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const RelCaseStudySchema = new mongoose.Schema({
-  case_study_id: {
+  caseStudy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CaseStudy",
   },

@@ -1,48 +1,30 @@
 const RelCaseStudyModel = require("../models/rel_case_study.model");
 
 module.exports = {
-  getAllRelCaseStudy: async (req, res) => {
-    const relCaseStudies = await RelCaseStudyModel.findOne({
-      case_study_id: req.params.id,
-    });
-    res.status(200).json({
-      message: "Success",
-      data: relCaseStudies,
-    });
+  getAllRelCaseStudy: () => {
+    return RelCaseStudyModel.find()
   },
-  getRelCaseStudy: async (req, res) => {
-    const relCaseStudy = await RelCaseStudyModel.findById(req.params.id);
-    res.status(200).json({
-      message: "Success",
-      data: relCaseStudy,
+  getRelCaseStudy: (id) => {
+    return RelCaseStudyModel.findOne({
+      case_study_id: id,
     });
+   
   },
-  createRelCaseStudy: async (req, res) => {
-    try {
-      const relCaseStudy = await RelCaseStudyModel.create(req.body);
-      res.status(201).json({
-        message: "Success",
-        data: relCaseStudy,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+  getRelCaseStudy: (id) => {
+    return RelCaseStudyModel.findById(id);
+   
   },
-  deleteRelCaseStudy: async (req, res) => {
-    try {
-      const relCaseStudy = await RelCaseStudyModel.findByIdAndDelete(
-        req.params.id
+  createRelCaseStudy: async (data) => {
+    return RelCaseStudyModel.create({...data});
+    
+  },
+  updateRelCaseStudy: (id, data)=> {
+    return RelCaseStudyModel.findByIdAndUpdate(id, { $set: {...data}})
+  },
+  deleteRelCaseStudy: (id) => {
+    return await RelCaseStudyModel.findByIdAndDelete(
+        id
       );
-      res.status(200).json({
-        message: "Success",
-        data: relCaseStudy,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: `Error: ${err}`,
-      });
-    }
+   
   },
 };

@@ -28,12 +28,7 @@ mongoose
     console.log(err);
   });
 
-app.use("/api/v1/acts", require("./routes/act.routes"));
-app.use("/api/v1/contact", require("./routes/contact.routes"));
-app.use("/api/v1/appointments", require("./routes/appointment.routes"));
-app.use("/api/v1/casecategories", require("./routes/case_categories.routes"));
-app.use("/api/v1/casestages", require("./routes/case_stages.routes"));
-app.use("/api/v1/casestudy", require("./routes/case_study.routes"));
+require("./routes/index.routes")(app);
 
 app.listen(port, () => {
   console.log("Example app listening on port 5000!");

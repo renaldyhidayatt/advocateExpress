@@ -5,7 +5,9 @@ module.exports = {
     return ContactModel.find();
   },
   getContact: (id) => {
-    return ContactModel.findById(req.params.id);
+    return ContactModel.findById(req.params.id)
+      .populate("location")
+      .populate("courtCategory");
   },
   createContact: (data) => {
     return ContactModel.create({ ...data });
