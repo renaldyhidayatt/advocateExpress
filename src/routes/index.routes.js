@@ -6,6 +6,7 @@ const caseStageRoutes = require("./case_stages.routes");
 const caseStudyRoutes = require("./case_study.routes");
 const userRoutes = require("./user.routes");
 const authRoutes = require("./auth.routes");
+const courtRoutes = require("./court.routes");
 const courtCategoriesRoutes = require("./court_categories.routes");
 const departmentRoutes = require("./department.routes");
 
