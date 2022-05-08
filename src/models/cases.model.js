@@ -7,23 +7,29 @@ const CasesModel = new mongoose.Schema({
   case_no: {
     type: String,
   },
-  client_id: {
-    type: Number,
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
-  location_id: {
-    type: Number,
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Location",
   },
-  court_id: {
-    type: Number,
+  court: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Court",
   },
-  court_category_id: {
-    type: Number,
+  court_category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CourtCategory",
   },
-  case_category_id: {
-    type: Number,
+  case_category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CaseCategory",
   },
   act_id: {
-    type: Number,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Act",
   },
   description: {
     type: String,

@@ -9,6 +9,9 @@ const authRoutes = require("./auth.routes");
 const courtRoutes = require("./court.routes");
 const courtCategoriesRoutes = require("./court_categories.routes");
 const departmentRoutes = require("./department.routes");
+const casesRoutes = require("./cases.routes");
+const relCaseStudyRoutes = require("./relCaseStudy.routes");
+const taxRoutes = require("./tax.routes");
 
 module.exports = (app) => {
   app.use("/api/acts", actRoutes);
@@ -22,4 +25,7 @@ module.exports = (app) => {
   app.use("/api/court_categories", courtCategoriesRoutes);
   app.use("/api/courts", courtRoutes);
   app.use("/api/departments", departmentRoutes);
+  app.use("/api/cases", casesRoutes);
+  app.use("/api/rel_case_studies", relCaseStudyRoutes);
+  app.use("/api/tax", taxRoutes);
 };

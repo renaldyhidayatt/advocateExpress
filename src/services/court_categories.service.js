@@ -12,7 +12,8 @@ module.exports = {
   },
   updateCourtCategory: (id, data) => {
     return CourtCategoryModel.findByIdAndUpdate(
-      data,
+      id,
+
       { $set: { ...data } },
       {
         new: true,
